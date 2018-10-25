@@ -11,7 +11,6 @@ body
 .calWrap
 { 
  z-index:0;
- width:20%;
  border-radius: 20px 20px;
  display:inline-block;
  float:left;
