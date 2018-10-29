@@ -15,11 +15,10 @@ let base =
         loc:"none"
       };
 
-
-
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]; // array of months so they can be added to the header
 
 let monthAndYear = document.querySelector("#monthAndYear"); //select header
+genEventList(); // Initialise empty events
 genCal(currMonth, currYear); // call calendar gen
 
 
@@ -38,8 +37,9 @@ function previous()
 }
 
 function genCal(month, year) 
-{  
-  genEventList(); // Needs to be moved. Generates again and again;
+{
+	
+  
 	let firstDay = (new Date(year, month)).getDay(); // find the first day of the selected month
     let daysInMonth = 32 - new Date(year, month, 32).getDate();
     /*
@@ -104,7 +104,7 @@ function genCal(month, year)
         }
         tbl.appendChild(row); // appending each row into calendar body.
     }
-printEvents();
+printEvents(month);
 }
 
 
@@ -118,22 +118,37 @@ function openEventScheduler ()
 function addEvent() 
 {
   let eventForm = document.querySelector("#addEvent");
-  let submitEvent = document.querySelector("#submitEvent");
-  let name = eventForm.name.value;
-  let location = eventForm.loc.value;
-  let startTime = eventForm.start.value;
-  let endTime = eventForm.end.value;
-  //Add any other required metadata
-  
+  let submitEvent = document.querySelector("#submitEvent");  
   let addEvtWin = document.querySelector(".eventWrap"); // to hide the window
   
   let testEvent = {};
   testEvent.id = cellID;
-  testEvent.name = name;
-  testEvent.location = location;
-  testEvent.startTime = startTime;
-  testEvent.endTime = endTime;
+  testEvent.name = eventForm.name.value;
+  testEvent.location = eventForm.loc.value;
+  testEvent.startTime = eventForm.start.value;
+  testEvent.endTime = eventForm.end.value;
   testEvent.month = currMonth;
+  //Add any other required metadata
+      
+  addEvtWin.style.display = "none";
+  
+  genEvents(testEvent);
+}
+
+function editEvent() 
+{
+  let eventForm = document.querySelector("#editEvt");
+  let submitEvent = document.querySelector("#editEvent");  
+  let addEvtWin = document.querySelector(".editWrap"); // to hide the window
+  
+  let testEvent = {};
+  testEvent.id = cellID;
+  testEvent.name = eventForm.name.value;
+  testEvent.location = eventForm.loc.value;
+  testEvent.startTime = eventForm.start.value;
+  testEvent.endTime = eventForm.end.value;
+  testEvent.month = events[cellID.slice(1,cellID.length)].month;
+   //Add any other required metadata
       
   addEvtWin.style.display = "none";
   
@@ -143,24 +158,21 @@ function addEvent()
 function genEvents (newEv)
 {
  events[newEv.id.slice(1,newEv.id.length)]=newEv;
- 
-  //Experiment to save to localstorage
-  
-  
+
   genCal(currMonth, currYear);
 
 }
 
 /*remove magic numbers */
 
-function printEvents()
+function printEvents(month)
 {
   let sched = document.querySelector(".schedule");
   sched.innerHTML = ""; // Clear or you will print events multiple times when adding a new one
   
-  for(let i=0; i<31; i++)
+  for(let i=0; i<=31; i++)
     {
-      if(events[i].id != "0")
+      if(events[i].id != "0" && events[i].month == month)
         {                
       let event = document.createElement("div"); 
           event.classList.add("newEvent");
@@ -195,35 +207,8 @@ function printEvents()
 
 function genEventList()
 {
-
-  for (let i =0; i<31; i++)
+  for (let i =0; i<=31; i++) //0 will always be empty, but the array seems to break if it starts at 0
     {
      events.push(base);
-    } 
-}
-
-
-function editEvent() 
-{
-  let eventForm = document.querySelector("#editEvt");
-  let submitEvent = document.querySelector("#editEvent");
-  let name = eventForm.newName.value;
-  let location = eventForm.newLoc.value;
-  let startTime = eventForm.newStart.value;
-  let endTime = eventForm.newEnd.value;
-  //Add any other required metadata
-  
-  let addEvtWin = document.querySelector(".editWrap"); // to hide the window
-  
-  let testEvent = {};
-  testEvent.id = cellID;
-  testEvent.name = name;
-  testEvent.location = location;
-  testEvent.startTime = startTime;
-  testEvent.endTime = endTime;
-  testEvent.month = events[cellID.slice(1,cellID.length)].month;
-      
-  addEvtWin.style.display = "none";
-  
-  genEvents(testEvent);
+    }
 }
