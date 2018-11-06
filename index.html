@@ -3,32 +3,31 @@
 <head>
     <title>Calendar</title>
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="assets/style/style.css">
 </head>
 <body>
   <div class="container">
 	<div class="calWrap">
-        <div class="header">
+		<div class="header">
           
-            <button class="button" id="previous" onclick="previous()"><
-          </button> <!-- tired of the event listener breaking -->
-          <h1 class="title" id="monthAndYear"></h1>
-              
-            <button class="button" id="next" onclick="next()">></button> <!-- tired of the event listener breaking -->
-    </div>
+			<button class="button" id="previous" onclick="previous()"><
+			</button> <!-- tired of the event listener breaking -->
+			<h1 class="title" id="monthAndYear"></h1>
+			<button class="button" id="next" onclick="next()">></button> <!-- tired of the event listener breaking -->
+		</div>
         <table>
             <thead>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
+         	   <tr>
+             		  <th>Sun</th>
+              		  <th>Mon</th>
+              		  <th>Tue</th>
+              		  <th>Wed</th>
+              		  <th>Thu</th>
+              		  <th>Fri</th>
+              		  <th>Sat</th>
+		   </tr>
             </thead>
 
             <tbody id="calBody">
@@ -37,51 +36,54 @@
         </table>
     </div>
     
-    <div class="eventWrap">
-  <form id="addEvent">
-    <h2>Add a new event:</h2>
-    <h3>Event Name:</h3>
-    <input type="text" placeholder="Event Name" name="name">  
-    <br>
-    <h3>Location:</h3>
-    <input type="text" placeholder="Location" name="loc">
-    <br>
-    <h3>Start Time:</h3>
-    <input type="time" name="start" value="00:00">
-    <br>
-    <h3>End Time:</h3>
-    <input type="time" name="end" value="23:59">
-  </form>
-  <button id="submitEvent" onclick="addEvent()">Save</button>
-</div>
+    	<div class="eventWrap">
+  		<form id="addEvent">
+    			<h2>Add a new event:</h2>
+    			<h3>Event Name:</h3>
+    			<input type="text" placeholder="Event Name" name="name">  
+    			<br>
+    			<h3>Location:</h3>
+    			<input type="text" placeholder="Location" name="loc">
+   			<br>
+    			<h3>Start Time:</h3>
+    			<input type="time" name="start" value="00:00">
+    			<br>
+    			<h3>End Time:</h3>
+   			 <input type="time" name="end" value="23:59">
+  		</form>
+  		<button id="submitEvent" onclick="addEvent()">Save</button>
+ 		<button id="cancelAdd">Cancel</button>
+	</div>
     
-    <div class="editWrap">
-  <form id="editEvt">
-    <h2>Edit selected event:</h2>
-    <h3>Event Name:</h3>
-    <input type="text" placeholder="Event Name" name="newName">  
-    <br>
-    <h3>Location:</h3>
-    <input type="text" placeholder="Location" name="newLoc">
-    <br>
-    <h3>Start Time:</h3>
-    <input type="time" name="newStart" value="00:00">
-    <br>
-    <h3>End Time:</h3>
-    <input type="time" name="newEnd" value="23:59">
-  </form>
-  <button id="editEvent" onclick="editEvent()">Save</button>
-</div>
+    	<div class="editWrap">
+  		<form id="editEvt">
+   			<h2>Edit selected event:</h2>
+  			<h3>Event Name:</h3>
+    			<input type="text" placeholder="Event Name" name="name">  
+    			<br>
+    			<h3>Location:</h3>
+    			<input type="text" placeholder="Location" name="loc">
+    			<br>
+    			<h3>Start Time:</h3>
+    			<input type="time" name="start" value="00:00">
+    			<br>
+    			<h3>End Time:</h3>
+   			<input type="time" name="end" value="23:59">
+  		</form>
+  		<button id="editEvent" onclick="editEvent()">Save</button>
+  		<button id="cancelEdit">Cancel</button>
+	</div>
     
-    <div class="scheduleWrap">
-      <h1>List of events:</h1>
-      <div class="schedule">
-      </div>
-    </div>
+    	<div class="scheduleWrap">
+      		<h1>List of events in <span id="eventListMonth"></span>:</h1>
+      		<div class="schedule">
+      		</div>
+    	</div>
         
-	  </div>    
+  </div>
     
-<script src="script.js"></script>
+    
+<script src="/script.js"></script>
 
 
 
